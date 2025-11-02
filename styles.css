@@ -147,7 +147,8 @@ body {
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .countdown-decoration {
@@ -1732,13 +1733,19 @@ body:has(.envelope-overlay:not(.hidden)) .container {
 /* Responsive Countdown Overlay */
 @media (max-width: 768px) {
     .countdown-content h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         margin-bottom: 1.5rem;
-        gap: 0.8rem;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        white-space: nowrap;
     }
 
     .countdown-decoration {
-        font-size: 2rem;
+        font-size: 1.6rem;
+    }
+    
+    .countdown-cap {
+        font-size: 1.8rem;
     }
 
     .countdown-timer {
@@ -1767,17 +1774,19 @@ body:has(.envelope-overlay:not(.hidden)) .container {
 
 @media (max-width: 480px) {
     .countdown-content h2 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         margin-bottom: 1rem;
-        gap: 0.5rem;
+        gap: 0.3rem;
+        flex-wrap: nowrap;
+        white-space: nowrap;
     }
 
     .countdown-cap {
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
 
     .countdown-decoration {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
     }
 
     .countdown-timer {
