@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Mời Tốt Nghiệp - Master of TESOL & FLT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Background Music -->
+    <audio id="backgroundMusic" preload="auto">
+        <source src="media/back-to-school-achievement-graduation-music-332455.mp3" type="audio/mpeg">
+    </audio>
+</head>
+<body>
+    <!-- Countdown Overlay -->
+    <div id="countdown-overlay" class="countdown-overlay">
+        <div class="countdown-content">
+            <h2>
+                <span class="countdown-decoration countdown-deco-left">✨</span>
+                Lễ Tốt Nghiệp Sắp Đến! <span class="countdown-cap">🎓</span>
+                <span class="countdown-decoration countdown-deco-right">✨</span>
+            </h2>
+            <div class="countdown-timer" id="countdown">
+                <div class="time-unit">
+                    <span class="time-value" id="countdown-days">00</span>
+                    <span class="time-label">Ngày</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="countdown-hours">00</span>
+                    <span class="time-label">Giờ</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="countdown-minutes">00</span>
+                    <span class="time-label">Phút</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="countdown-seconds">00</span>
+                    <span class="time-label">Giây</span>
+                </div>
+            </div>
+            <button class="open-invitation-btn" id="openInvitationBtn">Mở Thiệp Mời</button>
+        </div>
+    </div>
+
+    <!-- Envelope Cover Overlay -->
+    <div class="envelope-overlay hidden" id="envelopeOverlay">
+        <div class="envelope-container">
+            <div class="envelope" id="envelope">
+                <div class="envelope-body">
+                    <div class="envelope-icon">💌</div>
+                    <h2 class="envelope-title">Thiệp Mời Tốt Nghiệp</h2>
+                    <p class="envelope-message">Dành cho bạn bè, người thân</p>
+                </div>
+                <div class="envelope-flap"></div>
+                </div>
+        </div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles-container"></div>
+
+    <!-- Container -->
+    <div class="container hidden" id="mainContainer">
+        <!-- Invitation Card -->
+        <div class="invitation-card">
+            <!-- Decorative Elements -->
+            <div class="decoration top-left">🎓</div>
+            <div class="decoration top-right">✨</div>
+            <div class="decoration bottom-left">🌟</div>
+            <div class="decoration bottom-right">🎉</div>
+
+            <!-- Header -->
+            <div class="card-header">
+                <div class="icon">🎓</div>
+                <h1>Dear Graduate</h1>
+                <p>Thiệp Mời Tốt Nghiệp</p>
+            </div>
+
+            <!-- Content -->
+            <div class="content-section">
+                <div class="greeting">
+                    Chúc mừng <span class="highlight">Mai Đậu</span> đã hoàn thành xuất sắc chương trình <span class="highlight">HANU-UC Master of TESOL & FLT</span>!
+                </div>
+
+                <div class="congratulations">
+                    Gia đình và bạn bè trân trọng kính mời bạn bè, người thân tham dự <span class="highlight">Lễ Tốt Nghiệp</span> của Mai Đậu sẽ được tổ chức vào tháng 12 năm 2025 tại Đại học Hà Nội. Sự hiện diện của bạn bè, người thân là niềm vinh hạnh của chúng tôi.
+                </div>
+            </div>
+
+            <!-- Graduate Information -->
+            <div class="event-details">
+                <div class="detail-section graduate-info">
+                    <h3>🎓 Thông tin Tốt Nghiệp</h3>
+                    <ul>
+                        <li>
+                            <strong>Sinh viên:</strong> <span class="highlight">Mai Đậu</span>
+                        </li>
+                        <li>
+                            <strong>Chương trình:</strong> Master of TESOL & FLT
+                        </li>
+                        <li>
+                            <strong>Trường:</strong> Đại học Hà Nội - HANU
+                        </li>
+                        <li>
+                            <strong>Bằng cấp:</strong> Thạc sĩ Giảng dạy Tiếng Anh và Ngoại ngữ
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Event Details -->
+            <div class="event-details">
+                <!-- Date and Time -->
+                <div class="detail-section">
+                    <h3>📅 Date and Time</h3>
+                    <ul>
+                        <li>
+                            <strong>10:00 AM</strong> - Thứ Ba, <strong>9 tháng 12, 2025</strong>
+                        </li>
+                        <li>
+                            Check-in và nhận áo tốt nghiệp và mũ tốt nghiệp: <strong>8:00 AM - 8:30 AM</strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Venue -->
+                <div class="detail-section">
+                    <h3>📍 Venue</h3>
+                    <ul>
+                        <li>
+                            <strong>Toà nhà A1, Đại học Hà Nội</strong><br>
+                            Đường Nguyễn Trãi, Phường Đại Mỗ, Hà Nội
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Google Map -->
+                <div class="detail-section map-section">
+                    <h3>🗺️ Bản đồ</h3>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps?q=Đại+học+Hà+Nội,+Đường+Nguyễn+Trãi,+Phường+Đại+Mỗ,+Hà+Nội&output=embed"
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="google-map">
+                        </iframe>
+                </div>
+            </div>
+
+                <!-- Dress Code & Notes -->
+                <div class="detail-section notes-section">
+                    <h3>👔 Lưu ý</h3>
+                    <ul>
+                        <li>
+                            <strong>Trang phục:</strong> Trang trọng, lịch sự (áo sơ mi/cổ cao, quần tây hoặc váy)
+                        </li>
+                        <li>
+                            <strong>Thời gian có mặt:</strong> Vui lòng có mặt trước <strong>9:30 AM</strong> để check-in và ổn định chỗ ngồi
+                        </li>
+                        <li>
+                            <strong>Gửi xe:</strong> Bãi gửi xe miễn phí tại trường
+                        </li>
+                        <li>
+                            <strong>Liên hệ:</strong> Nếu có thắc mắc, vui lòng liên hệ qua email hoặc điện thoại
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer-section detail-section">
+                <div class="footer-decoration-left">✨</div>
+                <div class="footer-decoration-right">✨</div>
+                <p class="footer-text">
+                    <span class="footer-text-main">Trân trọng kính mời</span>
+                </p>
+                <div class="footer-underline"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
