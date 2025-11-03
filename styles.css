@@ -808,17 +808,17 @@ body:has(.envelope-overlay:not(.hidden)) .container {
     animation: fadeInUp 1s ease-out 0.7s both;
 }
 
-/* Decorative separator */
-.content-section::after,
+/* Decorative separator - commented out */
+/* .content-section::after,
 .event-details::before {
-    /* content: '✨';
+    content: '✨';
     display: block;
     text-align: center;
     font-size: 1.5rem;
     margin: 2rem auto;
     opacity: 0.6;
-    animation: sparkleFloat 3s ease-in-out infinite; */
-}
+    animation: sparkleFloat 3s ease-in-out infinite;
+} */
 
 @keyframes sparkleFloat {
     0%, 100% { 
@@ -1032,16 +1032,16 @@ html {
     position: relative;
 }
 
-.event-details::before {
-    /* content: '🎓';
+/* .event-details::before {
+    content: '🎓';
     display: block;
     text-align: center;
     font-size: 2rem;
     margin: 0 auto 1.5rem;
     opacity: 0.7;
     animation: capFloat 2.5s ease-in-out infinite;
-    filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.4)); */
-}
+    filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.4));
+} */
 
 @keyframes capFloat {
     0%, 100% { 
