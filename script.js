@@ -112,9 +112,9 @@ function openEnvelope() {
     if (isEnvelopeOpened) return;
     isEnvelopeOpened = true;
 
-    // Play background music
+    // Play background music (if not already playing)
     const backgroundMusic = document.getElementById('backgroundMusic');
-    if (backgroundMusic) {
+    if (backgroundMusic && backgroundMusic.paused) {
         backgroundMusic.volume = 0.5; // Set volume to 50%
         backgroundMusic.play().catch(error => {
             console.log('Autoplay prevented, user interaction required:', error);
@@ -137,20 +137,29 @@ function openEnvelope() {
     // Hide overlay after animation
     setTimeout(() => {
         envelopeOverlay.classList.add('hidden');
+        
+        // Show invitation card container using requestAnimationFrame for smooth transition
+        const mainContainer = document.getElementById('mainContainer');
+        if (mainContainer) {
+            // Use requestAnimationFrame to ensure smooth transition
+            requestAnimationFrame(() => {
+                mainContainer.classList.remove('hidden');
+                // Small delay to ensure CSS transition starts properly
+                requestAnimationFrame(() => {
+                    mainContainer.classList.add('show');
+                });
+            });
+        }
+        
         // Reset scroll position to top
         window.scrollTo({ top: 0, behavior: 'instant' });
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
         
-        // Show invitation card container
-        const mainContainer = document.getElementById('mainContainer');
-        if (mainContainer) {
-            mainContainer.classList.remove('hidden');
-            mainContainer.classList.add('show');
-        }
-        
         // Start continuous fireworks for invitation card
-        startContinuousFireworks();
+        setTimeout(() => {
+            startContinuousFireworks();
+        }, 500);
     }, 2000);
 }
 
@@ -514,6 +523,15 @@ function updateNumberWithAnimation(id, value) {
 
 // Open invitation (hide countdown, show envelope and auto-open)
 function openInvitation() {
+    // Play background music immediately when button is clicked
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    if (backgroundMusic) {
+        backgroundMusic.volume = 0.5; // Set volume to 50%
+        backgroundMusic.play().catch(error => {
+            console.log('Autoplay prevented, user interaction required:', error);
+        });
+    }
+    
     const countdownOverlay = document.getElementById('countdown-overlay');
     const envelopeOverlay = document.getElementById('envelopeOverlay');
     
@@ -599,5 +617,71 @@ function createShootingStars() {
             }, 4000);
         }
     }, 8000);
+}
+
+// Create firework at click position
+function createFireworkAtClick(event) {
+    // Get click position relative to viewport
+    const x = (event.clientX / window.innerWidth) * 100;
+    const y = (event.clientY / window.innerHeight) * 100;
+    
+    // Random firework type: 0 = circular, 1 = star, 2 = heart, 3 = willow, 4 = ring
+    const fireworkType = Math.floor(Math.random() * 5);
+    
+    switch(fireworkType) {
+        case 0:
+            createCircularFirework(x, y);
+            break;
+        case 1:
+            createStarFirework(x, y);
+            break;
+        case 2:
+            createHeartFirework(x, y);
+            break;
+        case 3:
+            createWillowFirework(x, y);
+            break;
+        case 4:
+            createRingFirework(x, y);
+            break;
+    }
+}
+
+// Add click event listener to create fireworks on click
+document.addEventListener('click', (event) => {
+    // Don't trigger fireworks on interactive elements (buttons, links, etc.)
+    const target = event.target;
+    const isInteractive = target.tagName === 'BUTTON' || 
+                          target.tagName === 'A' || 
+                          target.closest('button') || 
+                          target.closest('a') ||
+                          target.closest('#countdown-overlay') ||
+                          target.closest('.envelope-overlay');
+    
+    if (!isInteractive) {
+        createFireworkAtClick(event);
+    }
+});
+
+// Scroll to Top Button
+const scrollToTopBtn = document.getElementById('scrollToTop');
+
+if (scrollToTopBtn) {
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+
+    // Scroll to top when clicked
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 }
 

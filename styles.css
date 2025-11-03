@@ -599,21 +599,25 @@ body:has(.envelope-overlay:not(.hidden)) {
     padding: 2rem;
     position: relative;
     z-index: 10;
+    display: block;
+    will-change: opacity, transform;
 }
 
 .container.hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    display: none;
+    transform: scale(0.98);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
 }
 
 .container.show {
-    display: block;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    animation: fadeInUp 1s ease-out;
+    transform: scale(1);
+    animation: none;
+    transition: opacity 0.6s ease-out 0.15s, visibility 0.6s ease-out 0.15s, transform 0.6s ease-out 0.15s;
 }
 
 /* Hide container when countdown or envelope overlay is visible */
@@ -622,7 +626,7 @@ body:has(.envelope-overlay:not(.hidden)) .container {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
-    display: none !important;
+    transform: scale(0.95) !important;
 }
 
 /* Invitation Card */
@@ -633,10 +637,17 @@ body:has(.envelope-overlay:not(.hidden)) .container {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2);
     position: relative;
     overflow: hidden;
-    animation: cardEntrance 1s ease-out;
+    opacity: 0;
+    transform: translateY(20px) scale(0.99);
     margin-top: 2rem;
     margin-bottom: 2rem;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease-out 0.4s, transform 0.6s ease-out 0.4s;
+    will-change: opacity, transform;
+}
+
+.container.show .invitation-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 .invitation-card:hover {
@@ -647,7 +658,7 @@ body:has(.envelope-overlay:not(.hidden)) .container {
 @keyframes cardEntrance {
     0% {
         opacity: 0;
-        transform: translateY(50px) scale(0.9);
+        transform: translateY(30px) scale(0.98);
     }
     100% {
         opacity: 1;
@@ -684,6 +695,79 @@ body:has(.envelope-overlay:not(.hidden)) .container {
     color: #ffd700;
     margin-bottom: 1rem;
     animation: bounce 2s infinite;
+}
+
+/* Graduate Photo Container */
+.graduate-photo-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 1s ease-out 0.1s both;
+}
+
+.graduate-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 5px solid rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2),
+                0 0 0 10px rgba(255, 215, 0, 0.1),
+                0 0 0 20px rgba(118, 74, 162, 0.05);
+    transition: all 0.3s ease;
+    animation: photoFloat 3s ease-in-out infinite;
+    margin-top: 25px;
+}
+
+.graduate-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3),
+                0 0 0 10px rgba(255, 215, 0, 0.15),
+                0 0 0 20px rgba(118, 74, 162, 0.1);
+}
+
+@keyframes photoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.graduation-cap {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6rem;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3))
+            drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
+    animation: capBounce 2s ease-in-out infinite, capGlow 3s ease-in-out infinite;
+    z-index: 3;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.graduation-cap:hover {
+    transform: translateX(-50%) scale(1.1);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4))
+            drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
+}
+
+@keyframes capBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(-2deg); }
+    50% { transform: translateX(-50%) translateY(-8px) rotate(2deg); }
+}
+
+@keyframes capGlow {
+    0%, 100% { 
+        filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3))
+                drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    50% { 
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4))
+                drop-shadow(0 0 30px rgba(255, 215, 0, 0.7));
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
 }
 
 @keyframes bounce {
@@ -724,22 +808,188 @@ body:has(.envelope-overlay:not(.hidden)) .container {
     animation: fadeInUp 1s ease-out 0.7s both;
 }
 
+/* Decorative separator */
+.content-section::after,
+.event-details::before {
+    /* content: '✨';
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 2rem auto;
+    opacity: 0.6;
+    animation: sparkleFloat 3s ease-in-out infinite; */
+}
+
+@keyframes sparkleFloat {
+    0%, 100% { 
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translateY(-10px) scale(1.2);
+        opacity: 1;
+    }
+}
+
 .greeting {
-    font-size: 1.3rem;
-    color: #34495e;
-    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 2rem;
     line-height: 1.8;
+    text-align: center;
+    padding: 0 1rem;
+    letter-spacing: 0.5px;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.greeting .highlight {
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea, #764ba2, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .congratulations {
     font-size: 1.1rem;
     color: #2c3e50;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 182, 193, 0.1) 100%);
-    border-radius: 15px;
-    border-left: 4px solid #ffd700;
+    line-height: 1.9;
+    margin-bottom: 2.5rem;
+    padding: 2rem 1.8rem;
+    background: linear-gradient(135deg, 
+        rgba(255, 215, 0, 0.12) 0%, 
+        rgba(255, 182, 193, 0.12) 50%,
+        rgba(102, 126, 234, 0.08) 100%);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 1s ease-out 0.4s both, greetingGlow 3s ease-in-out infinite;
+}
+
+.congratulations::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    animation: rotateGradient 8s linear infinite;
+}
+
+@keyframes rotateGradient {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes greetingGlow {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15),
+                    0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 12px 35px rgba(255, 215, 0, 0.25),
+                    0 0 20px rgba(255, 215, 0, 0.2),
+                    0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+}
+
+.congratulations {
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.congratulations br {
+    display: block;
+    margin: 0.8rem 0;
+}
+
+/* Add decorative corner elements */
+.congratulations::after {
+    content: '✨';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+    opacity: 0.5;
+    animation: cornerSparkle 2s ease-in-out infinite;
+}
+
+@keyframes cornerSparkle {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(180deg);
+    }
+}
+
+/* Enhanced emoji visibility in text */
+.congratulations,
+.greeting {
+    position: relative;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced list items with staggered animation */
+.detail-section li {
+    opacity: 0;
+    animation: listItemFadeIn 0.6s ease-out forwards;
+}
+
+.detail-section li:nth-child(1) { animation-delay: 0.1s; }
+.detail-section li:nth-child(2) { animation-delay: 0.2s; }
+.detail-section li:nth-child(3) { animation-delay: 0.3s; }
+.detail-section li:nth-child(4) { animation-delay: 0.4s; }
+.detail-section li:nth-child(5) { animation-delay: 0.5s; }
+.detail-section li:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes listItemFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Enhanced hover effects for detail sections */
+.detail-section {
+    cursor: pointer;
+}
+
+.detail-section:hover .detail-section li {
+    transform: translateX(5px);
+    transition: transform 0.3s ease;
+}
+
+/* Subtle pulse effect for important elements */
+.graduate-info,
+.notes-section {
+    animation: subtlePulse 4s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 12px 35px rgba(255, 215, 0, 0.2);
+    }
 }
 
 .invitation-text {
@@ -750,13 +1000,25 @@ body:has(.envelope-overlay:not(.hidden)) .container {
 }
 
 .highlight {
-    background: linear-gradient(120deg, #ffd700 0%, #ffed4e 100%);
-    padding: 0.2rem 0.5rem;
-    border-radius: 5px;
-    font-weight: 600;
-    color: #2c3e50;
+    background: linear-gradient(135deg, #667eea, #764ba2, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    background-size: 200% 200%;
+    animation: highlightGradient 3s ease infinite;
     display: inline-block;
-    animation: pulse 2s infinite;
+    position: relative;
+    padding: 0;
+}
+
+@keyframes highlightGradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 @keyframes pulse {
@@ -767,6 +1029,29 @@ body:has(.envelope-overlay:not(.hidden)) .container {
 /* Event Details */
 .event-details {
     margin-top: 2rem;
+    position: relative;
+}
+
+.event-details::before {
+    /* content: '🎓';
+    display: block;
+    text-align: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    opacity: 0.7;
+    animation: capFloat 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.4)); */
+}
+
+@keyframes capFloat {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.7;
+    }
+    50% { 
+        transform: translateY(-8px) rotate(5deg);
+        opacity: 1;
+    }
 }
 
 .detail-section {
@@ -788,12 +1073,47 @@ body:has(.envelope-overlay:not(.hidden)) .container {
 
 .detail-section h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: #2c3e50;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #ffd700;
-    padding-bottom: 0.5rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(135deg, #ffd700, #667eea, #ffd700) 1;
+    border-image-slice: 1;
+    padding-bottom: 0.8rem;
     display: inline-block;
+    position: relative;
+    animation: titleSlide 0.6s ease-out;
+}
+
+.detail-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, #ffd700, transparent);
+    animation: titleUnderline 0.8s ease-out 0.3s both;
+}
+
+@keyframes titleSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes titleUnderline {
+    from {
+        width: 0;
+    }
+    to {
+        width: 50%;
+    }
 }
 
 .detail-section ul {
@@ -811,10 +1131,23 @@ body:has(.envelope-overlay:not(.hidden)) .container {
 }
 
 .detail-section li::before {
-    content: '🎓';
+    content: '✨';
     position: absolute;
     left: 0;
     font-size: 1.2rem;
+    animation: sparkleIcon 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
+}
+
+@keyframes sparkleIcon {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0.8;
+    }
 }
 
 .detail-section li strong {
@@ -877,11 +1210,46 @@ body:has(.envelope-overlay:not(.hidden)) .container {
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
+    animation: mapFadeIn 1s ease-out 1.2s both;
+}
+
+.map-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 215, 0, 0.03) 0%, 
+        transparent 50%,
+        rgba(102, 126, 234, 0.03) 100%);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.map-container:hover::before {
+    opacity: 1;
 }
 
 .map-container:hover {
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba(102, 126, 234, 0.1);
     transform: translateY(-2px);
+}
+
+@keyframes mapFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .google-map {
@@ -1001,6 +1369,27 @@ body:has(.envelope-overlay:not(.hidden)) .container {
     display: inline-block;
     position: relative;
     filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+}
+
+.footer-text-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.8rem;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    display: inline-block;
+    background: linear-gradient(135deg, 
+        #667eea 0%, 
+        #764ba2 50%,
+        #ffd700 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: footerTextGradient 3s ease infinite;
+    filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.4));
+    transform: rotate(-1deg);
 }
 
 @keyframes footerTextGradient {
@@ -1202,6 +1591,128 @@ body:has(.envelope-overlay:not(.hidden)) .container {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+    background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+.scroll-to-top:active {
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Skip to Content Link (Accessibility) */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #667eea;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 10000;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* Print Styles */
+@media print {
+    .countdown-overlay,
+    .envelope-overlay,
+    .particles-container,
+    .scroll-to-top,
+    .back-button,
+    .open-invitation-btn {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .invitation-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .detail-section {
+        page-break-inside: avoid;
+    }
+
+    .congratulations {
+        background: rgba(255, 215, 0, 0.1);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    @page {
+        margin: 2cm;
+    }
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Focus States for Accessibility */
+*:focus-visible {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #667eea;
+    outline-offset: 3px;
+}
+
+/* Reduced Motion (Accessibility) */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     body {
@@ -1235,14 +1746,28 @@ body:has(.envelope-overlay:not(.hidden)) .container {
         margin-bottom: 0.8rem;
     }
 
+    .graduate-photo {
+        width: 150px;
+        height: 150px;
+        border: 4px solid rgba(102, 126, 234, 0.3);
+    }
+
+    .graduation-cap {
+        font-size: 4.5rem;
+        top: -30px;
+        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3))
+                drop-shadow(0 0 18px rgba(255, 215, 0, 0.4));
+    }
+
     .card-header p {
         font-size: 1rem;
     }
 
     .greeting {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 1.2rem;
+        font-size: 1.3rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
     }
 
     .congratulations {
@@ -1354,13 +1879,27 @@ body:has(.envelope-overlay:not(.hidden)) .container {
         font-size: 2.5rem;
     }
 
+    .graduate-photo {
+        width: 120px;
+        height: 120px;
+        border: 3px solid rgba(102, 126, 234, 0.3);
+    }
+
+    .graduation-cap {
+        font-size: 3.5rem;
+        top: -14px;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))
+                drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+    }
+
     .card-header p {
         font-size: 0.95rem;
     }
 
     .greeting {
-        font-size: 1rem;
+        font-size: 1.15rem;
         line-height: 1.6;
+        padding: 0 0.5rem;
     }
 
     .congratulations {

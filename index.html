@@ -38,7 +38,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Stylesheet -->
@@ -50,6 +50,9 @@
     </audio>
 </head>
 <body>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#mainContainer" class="skip-to-content">Skip to content</a>
+
     <!-- Countdown Overlay -->
     <div id="countdown-overlay" class="countdown-overlay">
         <div class="countdown-content">
@@ -109,7 +112,10 @@
 
             <!-- Header -->
             <div class="card-header">
-                <div class="icon">🎓</div>
+                <div class="graduate-photo-container">
+                    <img src="image/554957940_4295962904016393_1545448652460916967_n.jpg" alt="Mai Đậu" class="graduate-photo">
+                    <div class="graduation-cap">🎓</div>
+                </div>
                 <h1>Dear Graduate</h1>
                 <p>Thiệp Mời Tốt Nghiệp</p>
             </div>
@@ -117,11 +123,15 @@
             <!-- Content -->
             <div class="content-section">
                 <div class="greeting">
-                    Chúc mừng <span class="highlight">Mai Đậu</span> đã hoàn thành xuất sắc chương trình <span class="highlight">HANU-UC Master of TESOL & FLT</span>!
+                    Hẹ hẹ, tốt nghịp thạc sí ròi cả nhà iu ơi🎓
                 </div>
 
                 <div class="congratulations">
-                    Gia đình và bạn bè trân trọng kính mời bạn bè, người thân tham dự <span class="highlight">Lễ Tốt Nghiệp</span> của Mai Đậu sẽ được tổ chức vào tháng 12 năm 2025 tại Đại học Hà Nội. Sự hiện diện của bạn bè, người thân là niềm vinh hạnh của chúng tôi.
+                    Nhân dịp chính thức nhận bằng Thạc sĩ chương trình <span class="highlight">HANU-UC Master of TESOL & FLT</span> vào ngày 09/12/2025, Mai xinh xin trân trọng (và vô cùng hân hoan, háo hức, hí hửng, hớn hở) mời đằng ấy đến:<br>
+                    📸 Chụp ảnh kỷ niệm cùng tân thạc sĩ<br>
+                    🍽️ Tham gia bữa cơm thân mật đầm ấm chung dzui<br>
+                    Sự hiện diện của các bạn là niềm vinh hạnh vô bờ bến đối dzới Mai xinh💕<br>
+                    Rất rất mong được đón tiếp cả nhà 😍🎉
                 </div>
             </div>
 
@@ -157,6 +167,9 @@
                         </li>
                         <li>
                             Check-in và nhận áo tốt nghiệp và mũ tốt nghiệp: <strong>8:00 AM - 8:30 AM</strong>
+                        </li>
+                        <li style="font-style: italic; color: #666; margin-top: 10px;">
+                            <em>(Vì chưa biết agenda của buổi lễ đây là khung giờ dự kiến Mai xinh có thể tiếp đón. Có gì thay đổi Mai xinh sẽ update nhen)</em>
                         </li>
                     </ul>
                 </div>
@@ -194,13 +207,15 @@
                     <h3>👔 Lưu ý</h3>
                     <ul>
                         <li>
-                            <strong>Trang phục:</strong> Trang trọng, lịch sự (áo sơ mi/cổ cao, quần tây hoặc váy)
+                            <strong>Trang phục:</strong> Tất nhiên là freestyle hẹ hẹ
                         </li>
                         <li>
                             <strong>Thời gian có mặt:</strong> Vui lòng có mặt trước <strong>9:30 AM</strong> để check-in và ổn định chỗ ngồi
                         </li>
                         <li>
-                            <strong>Gửi xe:</strong> Bãi gửi xe miễn phí tại trường
+                            <strong>Gửi xe:</strong><br>
+                            Bãi gửi xe tại trường có thu phí, hình như là 3 tỷ một vé (áp dụng cho tất cả các bãi xe trong trường).<br>
+                            Nhà xe hơi xa chỗ chụp ảnh xíu, và ngày hôm đó có thể sẽ đông xe hơn bình thường.
                         </li>
                         <li>
                             <strong>Liên hệ:</strong> Nếu có thắc mắc, vui lòng liên hệ qua email hoặc điện thoại
@@ -214,12 +229,16 @@
                 <div class="footer-decoration-left">✨</div>
                 <div class="footer-decoration-right">✨</div>
                 <p class="footer-text">
-                    <span class="footer-text-main">Trân trọng kính mời</span>
+                    <span class="footer-text-main">Thân mời,</span><br>
+                    <span class="footer-text-signature">Mai xinh.</span>
                 </p>
                 <div class="footer-underline"></div>
             </div>
         </div>
     </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">↑</button>
 
     <script src="script.js"></script>
 </body>
